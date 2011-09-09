@@ -1,0 +1,6 @@
+*.gem
+.bundle
+pkg/*
+.rvmrc*
+.DS_Store
+testing.rb
