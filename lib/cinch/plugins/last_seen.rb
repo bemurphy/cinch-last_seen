@@ -7,7 +7,6 @@ module Cinch
 
       def initialize(*args)
         super
-        @logged_messages = {}
         # TODO config this
         @backend = RedisStorage.new
       end
