@@ -9,7 +9,7 @@ module Cinch
     class LastSeen
       class RedisStorage
         def initialize
-          @redis = ::Redis::Namespace.new "cinch-seen_last", :redis => Redis.new
+          @redis = ::Redis::Namespace.new "cinch-seen_last", :redis => Redis.new(:thread_safe => true)
         end
 
         # def []=(key, value)
