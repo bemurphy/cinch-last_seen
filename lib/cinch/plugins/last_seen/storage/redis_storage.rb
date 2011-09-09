@@ -12,19 +12,6 @@ module Cinch
           @redis = ::Redis::Namespace.new "cinch-seen_last", :redis => Redis.new(:thread_safe => true)
         end
 
-        # def []=(key, value)
-        #   @redis.set key, Marshal.dump(value)
-        # end
-
-        # def [](key)
-        #   value = @redis.get key
-        #   Marshal.load(value) if value
-        # end
-
-        # def set_members(set)
-        #   @redis.zrange(set.to_s, 0, -1)
-        # end
-
         def record_time(set, key)
           @redis.zadd(set.to_s, Time.now.to_i, key.to_s)
         end
