@@ -25,6 +25,8 @@ module Cinch
       match /seen (.+)/, :method => :check_nick
 
       def check_nick(m, nick)
+        return unless log_channel?(m.channel)
+
         if time = backend.get_time(m.channel, nick)
           readable_time = Time.at time.to_i
           m.reply "I've last seen #{nick} at #{readable_time}", true

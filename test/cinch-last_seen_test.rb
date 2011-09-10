@@ -78,10 +78,16 @@ describe 'cinch-last_seen' do
       @plugin.log_message(@message)
     end
 
-    it "doesn't record times for specified channels" do
+    it "doesn't record times for unspecified channels" do
       @backend.expects(:record_time).never
       @message.stubs(:channel).returns("#foochat")
       @plugin.log_message(@message)
+    end
+
+    it "doesn't reply on unspecified channels" do
+      @message.stubs(:channel).returns("#foochat")
+      @message.expects(:reply).never
+      @plugin.check_nick(@message, "alice")
     end
   end
 
@@ -91,14 +97,19 @@ describe 'cinch-last_seen' do
     end
 
     it "records times for unspecified channels" do
+      @backend.expects(:record_time).with('#foochat', 'alice')
+      @message.stubs(:channel).returns("#foochat")
+      @plugin.log_message(@message)
+    end
+
+    it "doesn't record times for specified channels" do
       @backend.expects(:record_time).never
       @plugin.log_message(@message)
     end
 
-    it "doesn't record times for unspecified channels" do
-      @backend.expects(:record_time).with('#foochat', 'alice')
-      @message.stubs(:channel).returns("#foochat")
-      @plugin.log_message(@message)
+    it "doesn't reply on specified channels" do
+      @message.expects(:reply).never
+      @plugin.check_nick(@message, "alice")
     end
   end
 end
