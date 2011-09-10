@@ -6,7 +6,7 @@ require 'redis-namespace'
 
 module Cinch
   module Plugins
-    class LastSeen
+    module LastSeen
       class RedisStorage
         attr_reader :redis
 

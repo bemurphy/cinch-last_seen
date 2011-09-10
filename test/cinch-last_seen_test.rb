@@ -1,9 +1,8 @@
 require File.expand_path('../test_helper' ,__FILE__)
-require File.expand_path('../../lib/cinch/plugins/last_seen', __FILE__)
 
 describe 'cinch-last_seen' do
   def dont_register!
-    Cinch::Plugins::LastSeen.stubs(:__register_with_bot).with(any_parameters).returns(true)
+    Cinch::Plugins::LastSeen::Base.stubs(:__register_with_bot).with(any_parameters).returns(true)
   end
 
   def log_message(chatroom = '#chatroom', nick = 'alice')
@@ -16,7 +15,7 @@ describe 'cinch-last_seen' do
     Timecop.freeze(Time.now)
     @backend = mock("Backend")
     @bot = mock("Bot")
-    @plugin = Cinch::Plugins::LastSeen.new(@bot)
+    @plugin = Cinch::Plugins::LastSeen::Base.new(@bot)
     @config = mock("Config")
     @config.stubs("[]").with(:channels)
     @plugin.stubs(:config).returns(@config)

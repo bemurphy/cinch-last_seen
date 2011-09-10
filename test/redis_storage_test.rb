@@ -1,5 +1,5 @@
 require File.expand_path('../test_helper' ,__FILE__)
-require File.expand_path('../../lib/cinch/plugins/last_seen/storage/redis_storage', __FILE__)
+require 'redis/namespace'
 
 describe 'redis_storage' do
   before do
