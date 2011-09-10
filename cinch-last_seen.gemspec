@@ -1,6 +1,9 @@
+$:.push File.expand_path("../lib", __FILE__)
+require "cinch/plugins/last_seen/version"
+
 Gem::Specification.new do |s|
   s.name = 'cinch-last_seen'
-  s.version = '0.0.2'
+  s.version = Cinch::Plugins::LastSeen::VERSION
   s.summary = 'A "last seen" plugin for the Cinch framework'
   s.description = 'A "last seen" plugin for the Cinch framework'
   s.authors = ['Dominik Honnef']
