@@ -1,11 +1,5 @@
-require 'rubygems'
-require 'minitest/spec'
-require 'mocha'
-require 'timecop'
-require 'minitest/autorun'
-require File.expand_path('../../lib/cinch/plugins/last_seen',__FILE__)
-
-alias :context :describe
+require File.expand_path('../test_helper' ,__FILE__)
+require File.expand_path('../../lib/cinch/plugins/last_seen', __FILE__)
 
 describe 'cinch-last_seen' do
   def dont_register!
