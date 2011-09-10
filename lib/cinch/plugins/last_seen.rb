@@ -1,6 +1,10 @@
+require 'cinch'
+
 module Cinch
   module Plugins
     class LastSeen
+      attr_accessor :backend
+
       include Cinch::Plugin
 
       autoload :RedisStorage, File.expand_path('./lib/cinch/plugins/last_seen/storage/redis_storage.rb')
@@ -8,20 +12,20 @@ module Cinch
       def initialize(*args)
         super
         # TODO config this
-        @backend = RedisStorage.new
+        self.backend = RedisStorage.new
       end
 
       listen_to :channel, :method => :log_message
 
       def log_message(m)
         return unless log_channel?(m.channel)
-        @backend.record_time m.channel, m.user.nick
+        backend.record_time m.channel, m.user.nick
       end
 
       match /seen (.+)/, :method => :check_nick
 
       def check_nick(m, nick)
-        if time = @backend.get_time(m.channel, nick)
+        if time = backend.get_time(m.channel, nick)
           readable_time = Time.at time.to_i
           m.reply "I've last seen #{nick} at #{readable_time}", true
         else

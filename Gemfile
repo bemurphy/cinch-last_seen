@@ -1,4 +1,4 @@
 source "http://rubygems.org"
 
-# Specify your gem's dependencies in cinch-memo.gemspec
+# Specify your gem's dependencies in cinch-last_seen.gemspec
 gemspec
