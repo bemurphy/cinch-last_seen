@@ -1,10 +1,8 @@
 require 'rubygems'
-gem 'minitest'
 require 'minitest/spec'
 require 'mocha'
 require 'timecop'
 require 'minitest/autorun'
-require 'purdytest'
 require File.expand_path('../../lib/cinch/plugins/last_seen',__FILE__)
 
 alias :context :describe
